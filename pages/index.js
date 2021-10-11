@@ -6,7 +6,7 @@ import Controllbar from "../components/Controllbar";
 
 export default function Home() {
 
-	const [time, setTime] = useState([{ time: 1633930806000 }, { time: 1633946406000 }, { time: 1633948800000 }]);
+	const [time, setTime] = useState([]);
 	const [step, setStep] = useState(0);
 	const [timeNow, setTimeNow] = useState(new Date().toLocaleTimeString())
 
