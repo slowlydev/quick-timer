@@ -144,7 +144,7 @@ export default function Home() {
 					</motion.div>
 				))}
 				{!time[0] && (
-					<p>press the "time" button to start </p>
+					<p>press the time button to start </p>
 				)}
 			</motion.div>
 			<Controllbar resetTime={resetTime} addTime={addTime} />
