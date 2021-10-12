@@ -7,23 +7,29 @@ import Controllbar from "../components/Controllbar";
 export default function Home() {
 
 	const [time, setTime] = useState([]);
-	const [step, setStep] = useState(0);
-	const [timeNow, setTimeNow] = useState(new Date().toLocaleTimeString())
+	const [timeNow, setTimeNow] = useState(new Date().toLocaleTimeString().slice(0, -3))
+
+	useEffect(() => {
+		const local = localStorage.getItem("time");
+		if (local) {
+			setTime(JSON.parse(local));
+		}
+	}, [])
 
 	function updateTimeNow() {
 		setTimeNow(new Date().toLocaleTimeString());
 	}
 
-	setInterval(updateTimeNow, 1000);
+	setInterval(updateTimeNow, 10000);
 
 	function resetTime() {
 		setTime([]);
-		setStep(0);
+		localStorage.removeItem("time");
 	}
 
 	function addTime() {
-		setTime([...time, { time: Date.now() }])
-		setStep(step + 1);
+		setTime([...time, { time: Date.now() }]);
+		localStorage.setItem("time", JSON.stringify([...time, { time: Date.now() }]));
 	}
 
 	function totwoDigit(value) {
@@ -109,22 +115,22 @@ export default function Home() {
 	return (
 		<Container>
 			<h1>QuickTimer</h1>
-			<h2>{calcArray(time)}</h2>
+			<h1>{calcArray(time)}</h1>
 			<motion.div className="display">
 				{time.map((timeItem, index) => isEven(index) ? (
 					<motion.div className="section">
-						<p>{new Date(timeItem.time).toLocaleTimeString()}</p>
+						<p>{new Date(timeItem.time).toLocaleTimeString().slice(0, -3)}</p>
 						{time[time.indexOf(timeItem) + 1] && (
-							<p>{calcDiff(timeItem.time, time[time.indexOf(timeItem) + 1].time)}</p>
+							<p>{calcDiff(timeItem.time, time[time.indexOf(timeItem) + 1].time).slice(0, -3)}</p>
 						)}
 						{time[time.indexOf(timeItem) + 1] && (
-							<p>{new Date(time[time.indexOf(timeItem) + 1].time).toLocaleTimeString()}</p>
+							<p>{new Date(time[time.indexOf(timeItem) + 1].time).toLocaleTimeString().slice(0, -3)}</p>
 						)}
 						{!time[time.indexOf(timeItem) + 1] && (
-							<p>{calcDiff(timeItem.time, Date.now(timeNow))}</p>
+							<p>{calcDiff(timeItem.time, Date.now(timeNow)).slice(0, -3)}</p>
 						)}
 						{!time[time.indexOf(timeItem) + 1] && (
-							<p>{timeNow}</p>
+							<p>{timeNow.slice(0, -3)}</p>
 						)}
 					</motion.div>
 				) : (
@@ -137,6 +143,9 @@ export default function Home() {
 						)}
 					</motion.div>
 				))}
+				{!time[0] && (
+					<p>press the "time" button to start </p>
+				)}
 			</motion.div>
 			<Controllbar resetTime={resetTime} addTime={addTime} />
 		</Container>

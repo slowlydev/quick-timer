@@ -8,8 +8,8 @@
   "description": "A Work time logger",
   "icons": [
     {
-      "src": "/vercel.svg",
-      "sizes": "2000x2000",
+      "src": "/favicon.png",
+      "sizes": "900x900",
       "type": "image/png"
     }
   ]

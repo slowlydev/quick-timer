@@ -17,8 +17,8 @@ export default function Header(props) {
       <meta property="og:title" content="QuickTimer" />
       <meta property="og:site_name" content="QuickTimer" />
       <meta property="og:description" content="Log your work times easily with QuickTimer" />
-      <meta property="og:image" content="/logo_nobg.png" />
-      <meta property="og:url" content="https://quicktimer.vercel.app/" />
+      <meta property="og:image" content="/favicon.png" />
+      <meta property="og:url" content="https://quick-timer.vercel.app/" />
       <meta property="og:type" content="website" />
 
       <meta name="twitter:title" content="QuickTimer" />
@@ -31,10 +31,10 @@ export default function Header(props) {
       <meta name="apple-mobile-web-app-capable" content="yes" key="apple-web-app-capable" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" key="apple-status-bar" />
 
-      <link rel="shortcut icon" type="image/x-icon" href="/logo_nobg.png" key="shurtcut-icon" />
-      <link rel="apple-touch-icon" href="/logo.png" key="apple-touch-icon" />
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.png" key="shurtcut-icon" />
+      <link rel="apple-touch-icon" href="/favicon.png" key="apple-touch-icon" />
 
-      <link rel="canonical" href="https://quicktimer.vercel.app"></link>
+      <link rel="canonical" href="https://quick-timer.vercel.app"></link>
 
       <link rel="manifest" href="/manifest.webmanifest" />
     </Head>
