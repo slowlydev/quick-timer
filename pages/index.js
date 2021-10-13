@@ -146,6 +146,9 @@ export default function Home() {
 				{!time[0] && (
 					<p>press the time button to start </p>
 				)}
+				{time[0] && (
+					<p>{JSON.stringify(time)}</p>
+				)}
 			</motion.div>
 			<Controllbar resetTime={resetTime} addTime={addTime} />
 		</Container>
