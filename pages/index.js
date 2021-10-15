@@ -102,9 +102,10 @@ export default function Home() {
 				if (array[array.indexOf(timeItem) + 1]) {
 					totalHours = totalHours + calcDiffHours(timeItem.time, time[array.indexOf(timeItem) + 1].time);
 					totalMinutes = totalMinutes + calcDiffMinutes(timeItem.time, time[array.indexOf(timeItem) + 1].time);
-				} else {
-					totalHours = totalHours + calcDiffHours(timeItem.time, Date.now());
-					totalMinutes = totalMinutes + calcDiffMinutes(timeItem.time, Date.now());
+					if (totalMinutes >= 60) {
+						totalMinutes -= 60;
+						totalHours++;
+					}
 				}
 			}
 		}
@@ -145,9 +146,6 @@ export default function Home() {
 				))}
 				{!time[0] && (
 					<p>press the time button to start </p>
-				)}
-				{time[0] && (
-					<p>{JSON.stringify(time)}</p>
 				)}
 			</motion.div>
 			<Controllbar resetTime={resetTime} addTime={addTime} />
