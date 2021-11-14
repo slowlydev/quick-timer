@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import Container from "../components/Container";
@@ -20,7 +20,7 @@ export default function Home() {
 		setTimeNow(new Date().toLocaleTimeString());
 	}
 
-	setInterval(updateTimeNow, 10000);
+	setInterval(updateTimeNow, 1000);
 
 	function resetTime() {
 		setTime([]);
@@ -118,35 +118,37 @@ export default function Home() {
 			<h1>QuickTimer</h1>
 			<h1>{calcArray(time)}</h1>
 			<motion.div className="display">
-				{time.map((timeItem, index) => isEven(index) ? (
-					<motion.div className="section">
-						<p>{new Date(timeItem.time).toLocaleTimeString().slice(0, -3)}</p>
-						{time[time.indexOf(timeItem) + 1] && (
-							<p>{calcDiff(timeItem.time, time[time.indexOf(timeItem) + 1].time).slice(0, -3)}</p>
-						)}
-						{time[time.indexOf(timeItem) + 1] && (
-							<p>{new Date(time[time.indexOf(timeItem) + 1].time).toLocaleTimeString().slice(0, -3)}</p>
-						)}
-						{!time[time.indexOf(timeItem) + 1] && (
-							<p>{calcDiff(timeItem.time, Date.now(timeNow)).slice(0, -3)}</p>
-						)}
-						{!time[time.indexOf(timeItem) + 1] && (
-							<p>{timeNow.slice(0, -3)}</p>
-						)}
-					</motion.div>
-				) : (
-					<motion.div className="break">
-						{time[time.indexOf(timeItem) + 1] && (
-							<p>{calcDiff(timeItem.time, time[time.indexOf(timeItem) + 1].time)}</p>
-						)}
-						{!time[time.indexOf(timeItem) + 1] && (
-							<p>{calcDiff(timeItem.time, Date.now(timeNow))}</p>
-						)}
-					</motion.div>
-				))}
-				{!time[0] && (
-					<p>press the time button to start </p>
-				)}
+				<AnimatePresence>
+					{time.map((timeItem, index) => isEven(index) ? (
+						<motion.div className="section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+							<p>{new Date(timeItem.time).toLocaleTimeString().slice(0, -3)}</p>
+							{time[time.indexOf(timeItem) + 1] && (
+								<p>{calcDiff(timeItem.time, time[time.indexOf(timeItem) + 1].time).slice(0, -3)}</p>
+							)}
+							{time[time.indexOf(timeItem) + 1] && (
+								<p>{new Date(time[time.indexOf(timeItem) + 1].time).toLocaleTimeString().slice(0, -3)}</p>
+							)}
+							{!time[time.indexOf(timeItem) + 1] && (
+								<p>{calcDiff(timeItem.time, Date.now(timeNow)).slice(0, -3)}</p>
+							)}
+							{!time[time.indexOf(timeItem) + 1] && (
+								<p>{timeNow.slice(0, -3)}</p>
+							)}
+						</motion.div>
+					) : (
+						<motion.div className="break" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+							{time[time.indexOf(timeItem) + 1] && (
+								<p>{calcDiff(timeItem.time, time[time.indexOf(timeItem) + 1].time)}</p>
+							)}
+							{!time[time.indexOf(timeItem) + 1] && (
+								<p>{calcDiff(timeItem.time, Date.now(timeNow))}</p>
+							)}
+						</motion.div>
+					))}
+					{!time[0] && (
+						<motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>press the time button to start </motion.p>
+					)}
+				</AnimatePresence>
 			</motion.div>
 			<Controllbar resetTime={resetTime} addTime={addTime} />
 		</Container>
