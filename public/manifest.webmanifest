@@ -1,0 +1,16 @@
+{
+  "name": "QuickTimer",
+  "short_name": "QuickTimer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#f5f5f7",
+  "description": "A Work time logger",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "900x900",
+      "type": "image/png"
+    }
+  ]
+}
